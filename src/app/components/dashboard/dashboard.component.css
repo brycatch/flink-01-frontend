@@ -26,7 +26,7 @@
 }
 
 .menu-logo {
-  width: 180px;
+  width: 148px;
 }
 
 .menu-title {
@@ -34,6 +34,9 @@
 }
 
 .menu-button {
+  font-size: 14px;
+  text-align: center;
+  outline: none;
   font-weight: 600;
   padding: 12px;
   width: 132px;
@@ -49,4 +52,5 @@
 .main-content {
   grid-area: main-content;
   background-color: var(--content);
+  padding: 32px 32px 0 32px;
 }

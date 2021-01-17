@@ -1,0 +1,42 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-table {
+  border-spacing: initial;
+  border: 1px solid var(--letter);
+}
+
+.welcome-title {
+  font-weight: 600;
+}
+
+.table-caption {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.welcome-table-td, .welcome-table-th {
+  border: 1px solid var(--letter);
+}
+
+.welcome-pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pagination-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.pagination-number__selected {
+  font-weight: 600;
+  color: var(--buttons);
+}

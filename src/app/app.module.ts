@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateComponent } from './components/create/create.component';
 import { ListComponent } from './components/list/list.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { DatePipe } from './pipes/date/date.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     DashboardComponent,
     CreateComponent,
     ListComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    DatePipe
   ],
   imports: [
     BrowserModule,
