@@ -18,8 +18,8 @@ export class RestService {
     return this.http.post(`${environment.urlBase}/${route}`, body, { headers: httpHeaders });
   }
 
-  delete(route: string, params: HttpParams) {
-    return this.http.delete(`${environment.urlBase}/${route}`, { params });
+  delete(route: string) {
+    return this.http.delete(`${environment.urlBase}/${route}`);
   }
 
   patch(route: string, body?: object) {

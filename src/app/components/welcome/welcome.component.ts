@@ -11,7 +11,8 @@ import { WelcomeService } from './welcome.service';
 export class WelcomeComponent implements OnInit, OnDestroy {
   private limit: number;
   private skip: number;
-  private stockSubscription: Subscription;
+  private listSubscription: Subscription;
+  private deleteSubscription: Subscription;
   public stockExchanges: IStockExchange[];
 
   constructor(
@@ -27,14 +28,17 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.stockSubscription) {
-      this.stockSubscription.unsubscribe();
+    if (this.listSubscription) {
+      this.listSubscription.unsubscribe();
+    }
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
     }
   }
 
   private getStockList(clear = false) {
     this.stockExchanges = clear ? [] : this.stockExchanges;
-    this.stockSubscription =
+    this.listSubscription =
       this
         .service
         .stockList(this.limit, this.skip)
@@ -43,10 +47,15 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         });
   }
 
-  removeStock(id: string) {
-    console.log(id);
+  remove(id: string): void {
+    this.deleteSubscription = this.service
+      .delete(id)
+      .subscribe((res: { err: boolean }) => {
+        if (!res.err) {
+          this.getStockList(true);
+        }
+      });
   }
-
 
   public setPaginationItems($event: any): void {
     this.limit = Number($event.target.value) || 8;

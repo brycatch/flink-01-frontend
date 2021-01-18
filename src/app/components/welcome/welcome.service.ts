@@ -12,9 +12,12 @@ export class WelcomeService {
     private restService: RestService
   ) { }
 
-
   public stockList(limit: number = 8, skip: number = 0) {
     const query = `limit=${limit}&skip=${skip}`;
     return this.restService.get(`${this.urlBase}/list?${query}`);
+  }
+
+  public delete(id: string) {
+    return this.restService.delete(`${this.urlBase}/${id}`);
   }
 }
