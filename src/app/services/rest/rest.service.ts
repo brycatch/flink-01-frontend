@@ -22,7 +22,8 @@ export class RestService {
     return this.http.delete(`${environment.urlBase}/${route}`, { params });
   }
 
-  patch(route: string, body?: object, httpHeaders?: HttpHeaders) {
-    return this.http.patch(`${environment.urlBase}/${route}`, body, { headers: httpHeaders });
+  patch(route: string, body?: object) {
+    console.log({ route, body });
+    return this.http.patch(`${environment.urlBase}/${route}`, body);
   }
 }

@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit, OnDestroy {
-  private id: string;
+  public id: string;
   public loading: boolean;
   private stockExchange: IStockExchange;
   private getSubscription: Subscription;
@@ -47,7 +47,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       .subscribe((res: { err: boolean, code: number, data: { stock_exchange: IStockExchange } }) => {
         this.loading = false;
         if (res.code === 200) {
-          console.log(res.data.stock_exchange);
+          this.service.initForms(res.data.stock_exchange);
         }
       });
   }
@@ -69,6 +69,21 @@ export class CreateComponent implements OnInit, OnDestroy {
           }
         });
     }
-
+  }
+  public update(): void {
+    if (this.service.form.valid) {
+      const stockExchange: Partial<IStockExchange> = {
+        name: this.service.name.value,
+        description: this.service.description.value,
+        market_values: this.service.marketValues,
+      };
+      this.createSubscription = this.service
+        .patch(this.id, stockExchange)
+        .subscribe((res: { err: boolean, code: number, data: { stock_exchange: IStockExchange } }) => {
+          if (res.code === 200) {
+            this.router.navigateByUrl('/');
+          }
+        });
+    }
   }
 }

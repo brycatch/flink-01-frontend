@@ -22,12 +22,20 @@ export class CreateService {
     this.createMarketValues();
   }
 
-  private initForms(): void {
-    this.form = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      symbol: new FormControl('', [Validators.pattern(this.symbolRegex), Validators.required], [this.symbolIsTakenAsyncValidator()])
-    });
+  public initForms(iStockExchange: IStockExchange = null): void {
+    if (iStockExchange) {
+      this.form = new FormGroup({
+        name: new FormControl(iStockExchange.name, [Validators.required]),
+        description: new FormControl(iStockExchange.description, [Validators.required]),
+        symbol: new FormControl({ value: iStockExchange.symbol, disabled: true })
+      });
+    } else {
+      this.form = new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
+        symbol: new FormControl('', [Validators.pattern(this.symbolRegex), Validators.required], [this.symbolIsTakenAsyncValidator()])
+      });
+    }
   }
 
   private symbolIsTakenAsyncValidator(): AsyncValidatorFn {
@@ -68,5 +76,10 @@ export class CreateService {
   public create(stockExchange: IStockExchange) {
     const body = { stock_exchange: JSON.stringify(stockExchange) };
     return this.restService.post('stock-exchange/', body);
+  }
+
+  public patch(id: string, stockExchange: Partial<IStockExchange>) {
+    const body = { stock_exchange: JSON.stringify(stockExchange) };
+    return this.restService.patch(`stock-exchange/${id}`, body);
   }
 }

@@ -1,6 +1,6 @@
 <section class="create" *ngIf="!this.loading">
   <h2>Agregar stock</h2>
-  <form [formGroup]="this.service.form" autocomplete="off" class="form" (ngSubmit)="create()">
+  <form [formGroup]="this.service.form" autocomplete="off" class="form" (ngSubmit)="this.id ? update() : create()">
     <div class="form-container-input">
       <p class="form-input-name">Nombre</p>
       <input class="form-input" type="text" name="name" formControlName="name" #name>
