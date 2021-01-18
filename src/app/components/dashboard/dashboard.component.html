@@ -1,19 +1,12 @@
-<!-- Testing
-
-<a [routerLink]="['/']">Welcome</a>
-<a [routerLink]="['/create']">Create</a>
-<a [routerLink]="['/list']">List</a>
-
-<router-outlet></router-outlet> -->
 <section class="dashboard">
   <div class="dashboard-container">
     <div class="menu">
-      <a>
-        <img class="menu-logo" src="assets/logo.svg" alt="Logo">
+      <a [routerLink]="['/']">
+        <img class=" menu-logo" src="assets/logo.svg" alt="Logo">
       </a>
       <h1 class="menu-title">¡Bienvenido!</h1>
-      <a class="menu-button">Crear </a>
-      <a class="menu-button">Modificar</a>
+      <a class="menu-button" [routerLink]="['/create']">Nuevo</a>
+      <a class="menu-button" [routerLink]="['/']">Lista</a>
     </div>
     <div class="main-content">
       <router-outlet></router-outlet>
