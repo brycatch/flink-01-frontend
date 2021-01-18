@@ -4,19 +4,19 @@
     <div class="form-container-input">
       <p class="form-input-name">Nombre</p>
       <input class="form-input" type="text" name="name" formControlName="name" #name>
-      <p class="form-error" *ngIf="this.service.name.touched && this.service.name.hasError('required')">Error 1</p>
+      <p class="form-error" *ngIf="this.service.name.touched && this.service.name.hasError('required')">Requerido</p>
     </div>
     <div class="form-container-input">
       <p class="form-input-name">Descripción</p>
       <input class="form-input form-input__description" type="text" name="description" formControlName="description" #description>
-      <p class="form-error" *ngIf="this.service.description.touched && this.service.description.hasError('required')">Error</p>
+      <p class="form-error" *ngIf="this.service.description.touched && this.service.description.hasError('required')">Requerido</p>
     </div>
     <div class="form-container-input">
       <p class="form-input-name">Símbolo</p>
       <input class="form-input" type="text" name="symbol" formControlName="symbol" #symbol>
-      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('required')">Error</p>
-      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('symbolIsTaken')">Error existente</p>
-      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('pattern')">Patrón</p>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('required')">Requerido</p>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('symbolIsTaken')">Símbolo usado por otro stock</p>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('pattern')">Patrón incorrecto</p>
     </div>
     <div class="form-container-submit">
       <button class="form-submit" type="submit" [disabled]="this.service.form.invalid">Enviar</button>
