@@ -1,2 +1,88 @@
-<p>create works!</p>
-<i class="fa fa-camera-retro fa-lg"></i>
+<section class="create" *ngIf="!this.loading">
+  <h2>Agregar stock</h2>
+  <form [formGroup]="this.service.form" autocomplete="off" class="form" (ngSubmit)="create()">
+    <div class="form-container-input">
+      <p class="form-input-name">Nombre</p>
+      <input class="form-input" type="text" name="name" formControlName="name" #name>
+      <p class="form-error" *ngIf="this.service.name.touched && this.service.name.hasError('required')">Error 1</p>
+    </div>
+    <div class="form-container-input">
+      <p class="form-input-name">Descripción</p>
+      <input class="form-input form-input__description" type="text" name="description" formControlName="description" #description>
+      <p class="form-error" *ngIf="this.service.description.touched && this.service.description.hasError('required')">Error</p>
+    </div>
+    <div class="form-container-input">
+      <p class="form-input-name">Símbolo</p>
+      <input class="form-input" type="text" name="symbol" formControlName="symbol" #symbol>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('required')">Error</p>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('symbolIsTaken')">Error existente</p>
+      <p class="form-error" *ngIf="this.service.symbol.touched && this.service.symbol.hasError('pattern')">Patrón</p>
+    </div>
+    <div class="form-container-submit">
+      <button class="form-submit" type="submit" [disabled]="this.service.form.invalid">Enviar</button>
+    </div>
+  </form>
+  <p>(Valores de mercado generados automáticamente)</p>
+  <div class="market-tables">
+    <table class="market-value-table" *ngIf="this.service.marketValues.length > 0">
+      <tbody>
+        <tr>
+          <th class="market-value-th">#</th>
+          <th class="market-value-th">Valor</th>
+        </tr>
+        <tr *ngFor="let mv of this.service.marketValues.slice(0, 10); let i = index">
+          <td class="market-value-td">{{ i + 1 }}</td>
+          <td class="market-value-td market-value-td__value">{{ mv.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="market-value-table" *ngIf="this.service.marketValues.length > 0">
+      <tbody>
+        <tr>
+          <th class="market-value-th">#</th>
+          <th class="market-value-th">Valor</th>
+        </tr>
+        <tr *ngFor="let mv of this.service.marketValues.slice(10, 20); let i = index">
+          <td class="market-value-td">{{ i + 1 }}</td>
+          <td class="market-value-td market-value-td__value">{{ mv.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="market-value-table" *ngIf="this.service.marketValues.length > 0">
+      <tbody>
+        <tr>
+          <th class="market-value-th">#</th>
+          <th class="market-value-th">Valor</th>
+        </tr>
+        <tr *ngFor="let mv of this.service.marketValues.slice(20, 30); let i = index">
+          <td class="market-value-td">{{ i + 1 }}</td>
+          <td class="market-value-td market-value-td__value">{{ mv.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="market-value-table" *ngIf="this.service.marketValues.length > 0">
+      <tbody>
+        <tr>
+          <th class="market-value-th">#</th>
+          <th class="market-value-th">Valor</th>
+        </tr>
+        <tr *ngFor="let mv of this.service.marketValues.slice(30, 40); let i = index">
+          <td class="market-value-td">{{ i + 1 }}</td>
+          <td class="market-value-td market-value-td__value">{{ mv.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="market-value-table" *ngIf="this.service.marketValues.length > 0">
+      <tbody>
+        <tr>
+          <th class="market-value-th">#</th>
+          <th class="market-value-th">Valor</th>
+        </tr>
+        <tr *ngFor="let mv of this.service.marketValues.slice(40, 50); let i = index">
+          <td class="market-value-td">{{ i + 1 }}</td>
+          <td class="market-value-td market-value-td__value">{{ mv.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

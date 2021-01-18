@@ -8,6 +8,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 const ROUTES: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'create/:id', component: CreateComponent },
   { path: 'list', component: ListComponent },
 ];
 

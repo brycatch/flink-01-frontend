@@ -20,8 +20,12 @@
         <td class="welcome-table-td"> {{ stock.created | date:true }} </td>
         <td class="welcome-table-td">
           <div class="table-td-icons">
-            <i class="td-icon fas fa-edit"></i>
-            <i class="td-icon far fa-trash-alt"></i>
+            <a class="td-icon-anchor" [routerLink]="['/create', stock._id]">
+              <i class="td-icon fas fa-edit"></i>
+            </a>
+            <a class="td-icon-anchor" (click)="removeStock(stock._id)">
+              <i class="td-icon far fa-trash-alt"></i>
+            </a>
           </div>
         </td>
       </tr>

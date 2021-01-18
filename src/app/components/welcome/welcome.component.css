@@ -52,3 +52,8 @@
   font-weight: 600;
   color: var(--buttons);
 }
+
+.td-icon-anchor {
+  text-decoration: none;
+  color: var(--letter);
+}

@@ -4,7 +4,7 @@ export interface IMarketValue {
 }
 
 export interface IStockExchange {
-  _id: string;
+  _id?: string;
   name: string;
   description: string;
   symbol: string;

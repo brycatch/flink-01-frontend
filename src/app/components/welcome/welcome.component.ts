@@ -22,11 +22,11 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.stockExchanges = [];
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getStockList();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.stockSubscription) {
       this.stockSubscription.unsubscribe();
     }
@@ -41,6 +41,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         .subscribe((res: { err: boolean, code: number, data: { length: number, stockExchanges: IStockExchange[] } }) => {
           this.stockExchanges.push(...res.data.stockExchanges);
         });
+  }
+
+  removeStock(id: string) {
+    console.log(id);
   }
 
 
