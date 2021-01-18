@@ -1,5 +1,5 @@
 <section class="welcome">
-  <table class="welcome-table">
+  <table class="welcome-table" *ngIf="stockExchanges.length > 0">
     <caption class="table-caption">
       <h2 class="table-caption-title">Índices</h2>
     </caption>
@@ -15,10 +15,15 @@
     <tbody>
       <tr *ngFor="let stock of stockExchanges">
         <td class="welcome-table-td"> {{ stock.name }} </td>
-        <td class="welcome-table-td"> {{ stock.description }} </td>
+        <td class="welcome-table-td"> {{ stock.description | shortText:30 }} </td>
         <td class="welcome-table-td"> {{ stock.symbol }} </td>
         <td class="welcome-table-td"> {{ stock.created | date:true }} </td>
-        <td class="welcome-table-td"> Acciones </td>
+        <td class="welcome-table-td">
+          <div class="table-td-icons">
+            <i class="td-icon fas fa-edit"></i>
+            <i class="td-icon far fa-trash-alt"></i>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -26,13 +31,13 @@
     <div class="pagination-items">
       <p class="pagination-title">Items por página</p>
       <select (change)="setPaginationItems($event)">
-        <option>10</option>
-        <option>20</option>
-        <option>30</option>
-        <option>40</option>
-        <option>50</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
       </select>
     </div>
-    <div>Paginación</div>
   </div>
 </section>

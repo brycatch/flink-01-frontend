@@ -1,36 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IStockExchange } from '../../intefaces/stock-exchange.interface';
+import { WelcomeService } from './welcome.service';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
-  public stockExchanges: IStockExchange[] = [];
+export class WelcomeComponent implements OnInit, OnDestroy {
+  private limit: number;
+  private skip: number;
+  private stockSubscription: Subscription;
+  public stockExchanges: IStockExchange[];
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.getDummyStock();
+  constructor(
+    private service: WelcomeService
+  ) {
+    this.limit = 5;
+    this.skip = 0;
+    this.stockExchanges = [];
   }
 
-  // tslint:disable-next-line:typedef
-  private getDummyStock() {
-    const stockDummy: IStockExchange = {
-      _id: 'asd',
-      name: 'nombre',
-      description: 'description',
-      symbol: 'QWE',
-      market_values: [],
-      created: new Date()
-    };
-
-    this.stockExchanges.push(stockDummy, stockDummy, stockDummy, stockDummy, stockDummy, stockDummy, stockDummy);
+  ngOnInit() {
+    this.getStockList();
   }
+
+  ngOnDestroy() {
+    if (this.stockSubscription) {
+      this.stockSubscription.unsubscribe();
+    }
+  }
+
+  private getStockList(clear = false) {
+    this.stockExchanges = clear ? [] : this.stockExchanges;
+    this.stockSubscription =
+      this
+        .service
+        .stockList(this.limit, this.skip)
+        .subscribe((res: { err: boolean, code: number, data: { length: number, stockExchanges: IStockExchange[] } }) => {
+          this.stockExchanges.push(...res.data.stockExchanges);
+        });
+  }
+
 
   public setPaginationItems($event: any): void {
-    console.log($event.target.value);
+    this.limit = Number($event.target.value) || 8;
+    this.skip = 0;
+    this.getStockList(true);
   }
 
 }
